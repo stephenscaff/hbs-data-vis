@@ -1,0 +1,127 @@
+<div class="scorecard-table__body grid-lg">
+  <header class="scorecard-table__header">
+    <form class="scorecard-table__form">
+      <div class="scorecard-table__control">
+        <input id="js-scorecard-table-input" data-table="scorecard-table__table" class="scorecard-table__input js-filtered-search"  type="text" value="" placeholder="Search by City or Country">
+        <i class="scorecard-table__input-icon icon-search"></i>
+      </div>
+      <div class="scorecard-table__control">
+        <select class="js-select js-select-region"  data-placeholder="Select a Region" style="width: 100%">
+          <option></option>
+          <option value="Africa">Africa</option>
+          <option value="Asia">Asia</option>
+          <option value="Europe">Europe</option>
+          <option value="North America">North America</option>
+          <option value="South America">South America</option>
+        </select>
+      </div>
+      <div class="scorecard-table__control">
+        <select class="js-select js-select-country" data-placeholder="Select a Country" style="width: 100%">
+          <option></option>
+          <option value="Austria">Austria</option>
+          <option value="Belgium">Belgium</option>
+          <option value="Brazil">Brazil</option>
+          <option value="Canada">Canada</option>
+          <option value="Colombia">Colombia</option>
+          <option value="Czech Republic">Czech Republic</option>
+          <option value="Denmark">Denmark</option>
+          <option value="Ecuador">Ecuador</option>
+          <option value="Finland">Finland</option>
+          <option value="France">France</option>
+          <option value="Germany">Germany</option>
+          <option value="Hungary">Hungary</option>
+          <option value="Indonesia">Indonesia</option>
+          <option value="Ireland">Ireland</option>
+          <option value="Italy">Italy</option>
+          <option value="Kuwait">Kuwait</option>
+          <option value="Luxembourg">Luxembourg</option>
+          <option value="Mexico">Mexico</option>
+          <option value="Netherlands">Netherlands</option>
+          <option value="Norway">Norway</option>
+          <option value="Poland">Poland</option>
+          <option value="Portugal">Portugal</option>
+          <option value="Puerto Rico">Puerto Rico</option>
+          <option value="Russia">Russia</option>
+          <option value="Saudi Arabia">Saudi Arabia</option>
+          <option value="Singapore">Singapore</option>
+          <option value="Slovakia">Slovakia</option>
+          <option value="South Africa">South Africa</option>
+          <option value="Spain">Spain</option>
+          <option value="Sweden">Sweden</option>
+          <option value="Switzerland">Switzerland</option>
+          <option value="Thailand">Thailand</option>
+          <option value="Turkey">Turkey</option>
+          <option value="UK">UK</option>
+          <option value="United Arab Emirates">United Arab Emirates</option>
+          <option value="USA">USA</option>
+          <option value="Venezuela">Venezuela</option>
+        </select>
+      </div>
+      <div class="scorecard-table__control">
+        <select class="js-select js-select-citysize" data-placeholder="Select by City Size" style="width: 100%">
+          <option></option>
+          <option value="0">All</option>
+          <option value="Mega City">Mega City</option>
+          <option value="Major City">Major City</option>
+        </select>
+      </div>
+    </form>
+  </header>
+  <script>
+  $(".js-select").select2({
+    placeholder: "Select a Country",
+    allowClear: true
+  });
+</script>
+  <div class="scorecard-table__wrap table--scroll">
+    <section class="scorecard-table__preheader">
+      <span></span>
+      <span> Driving Time Spent in Congestion </span>
+    </section>
+
+    <table id="js-table" class="scorecard-table__table js-filters is-top25">
+      <thead>
+        <tr>
+        <th data-order="asc">City</th>
+          <th data-order="asc"><span>2016 All Cities Rank (2015)<i class="icon-sort"></i></span></th>
+          <th data-order="asc"><span>2016 INRIX Traffic Scorecard Rank (2015) <i class="icon-sort"></i></span></th>
+          <th data-order="asc"><span>Hours Spent in Congestion <i class="icon-sort"></i></span></th>
+          <th data-order="asc"><span>ICI <i class="icon-sort"></i></span></th>
+          <th data-order="asc"><span>Peak <i class="icon-sort"></i></span></th>
+          <th data-order="asc"><span>Daytime <i class="icon-sort"></i></span></th>
+          <th data-order="asc"><span>Overall <i class="icon-sort"></i></span></th>
+        </tr>
+      </thead>
+
+      <tbody class="js-table-filter">
+        <!-- Js Template Rendered Here -->
+        {{debug}}
+
+        {{#cities}}
+          <tr data-value="{{main_rank_2016}}" data-sorting="{{cityFormat city}}">
+            <td>
+              <a class="scorecard-table__link" href="city.html?city={{city}}&index={{indexOffset @index}}">
+                <img class="scorecard-table__flag" src="/assets/images/flags/{{fileName country}}.png">
+                <span class="scorcard-table__city">{{cityFormat city}}</span>
+                <span class="hide">{{continent}} {{country}} {{#if mega_city}}Mega City{{/if}} {{#if major_city}}Major City{{/if}}</span>
+              </a>
+            </td>
+            <td data-sort="{{all_rank_2016}}">{{all_rank_2016}} {{#if all_rank_2015}}({{all_rank_2015}}){{else}}(—){{/if}}</td>
+            <td data-sort="{{main_rank_2016}}">
+              {{#if main_rank_2016}}
+                {{main_rank_2016}} ({{main_rank_2015}})
+              {{else}}
+                —
+              {{/if}}
+            </td>
+            <td data-sort="{{hours_in_congestion}}">{{upDown ici_change_15_16 hours_in_congestion}}</td>
+            <td data-sort="{{ici}}">{{ici}}</td>
+            <td data-sort="{{peak_hours}}">{{peak_hours}}</td>
+            <td data-sort="{{day_time}}">{{day_time}}</td>
+            <td data-sort="{{overall}}">{{overall}}</td>
+          </tr>
+        {{/cities}}
+      </tbody>
+    </table>
+  </div>
+</div>

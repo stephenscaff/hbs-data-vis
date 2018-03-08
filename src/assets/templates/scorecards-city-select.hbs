@@ -1,0 +1,30 @@
+{{#cityNav cities 'previous'}}
+  <a class="city-nav__link" href="city.html?city={{city}}&index={{all_rank_2016}}">
+    <i class="icon-left-chev"></i>
+    <span class="city-nav__link-text">{{cityFormat city}}
+  </a>
+{{/cityNav}}
+
+<select class="js-select js-select-city"  data-placeholder="Choose City">
+  <option></option>
+  {{#cities}}
+    <option value="city.html?city={{city}}&index={{all_rank_2016}}">{{cityFormat city}}</option>
+  {{/cities}}
+</select>
+
+{{#cityNav cities 'next'}}
+  <a class="city-nav__link" href="city.html?city={{city}}&index={{all_rank_2016}}">
+    <span class="city-nav__link-text">{{cityFormat city}}</span>
+    <i class="icon-right-chev"></i>
+  </a>
+{{/cityNav}}
+
+<script type="text/javascript">
+  $(".js-select").select2({
+    allowClear: true
+  });
+  $('.js-select').on('change', function() {
+    var nextCity = $(this).val();
+    window.location = nextCity;
+  });
+</script>
